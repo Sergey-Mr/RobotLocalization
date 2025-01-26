@@ -7,6 +7,14 @@ Robot::Robot(int x, int y, Map& map, double sensorNoiseLevel): x(x), y(y), map(m
     initializeProbabilityDistribution();
 }
 
+int Robot::getX() const{
+    return this->x;
+}
+
+int Robot::getY() const {
+    return this->y;
+}
+
 void Robot::initializeProbabilityDistribution() {
     int width = map.getGrid()[0].size();
     int height = map.getGrid().size();

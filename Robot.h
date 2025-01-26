@@ -15,6 +15,8 @@ class Robot {
         std::vector<int> getSensorReading() const;
         void displayProbabilityDistribution() const;
         void updateProbabilityDistribution();
+        int getX() const;
+        int getY() const;
 
     private:
         int x; 
