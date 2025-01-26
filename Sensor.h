@@ -8,6 +8,7 @@ class Sensor {
     public:
         Sensor(double noiseLevel);
         std::vector<int> getReading(int x, int y, const Map& map) const;
+        double getNoise() const;
 
     private:
         double noiseLevel;

@@ -24,5 +24,9 @@ int main() {
     }
     std::cout << std::endl;
 
+    // Update probability distribution using sensor readings
+    robot.updateProbabilityDistribution();
+    robot.displayProbabilityDistribution();
+
     return 0;
 }

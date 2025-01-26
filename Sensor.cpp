@@ -22,3 +22,7 @@ std::vector<int> Sensor::getReading(int x, int y, const Map& map) const {
 
     return readings;
 }
+
+double Sensor::getNoise() const {
+    return this->noiseLevel;
+}

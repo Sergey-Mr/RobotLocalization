@@ -14,6 +14,7 @@ class Robot {
         void displayPosition() const;
         std::vector<int> getSensorReading() const;
         void displayProbabilityDistribution() const;
+        void updateProbabilityDistribution();
 
     private:
         int x; 
@@ -23,6 +24,8 @@ class Robot {
         std::vector<std::vector<double>> probabilityDistribution;
         void updatePosition(int newX, int newY);
         void initializeProbabilityDistribution();
+        double sensorModel(int x, int y, const std::vector<int>& sensorReading) const;
+        void normalizeProbabilityDistribution();
 };
 
 #endif
