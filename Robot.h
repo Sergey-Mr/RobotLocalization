@@ -13,13 +13,16 @@ class Robot {
         void moveRight();
         void displayPosition() const;
         std::vector<int> getSensorReading() const;
+        void displayProbabilityDistribution() const;
 
     private:
         int x; 
         int y;
         Map& map;
         Sensor sensor;
+        std::vector<std::vector<double>> probabilityDistribution;
         void updatePosition(int newX, int newY);
+        void initializeProbabilityDistribution();
 };
 
 #endif

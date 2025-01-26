@@ -3,7 +3,16 @@
 
 Robot::Robot(int x, int y, Map& map, double sensorNoiseLevel): x(x), y(y), map(map), sensor(sensorNoiseLevel){
     map.addRobot(x, y);
+    initializeProbabilityDistribution();
 }
+
+void Robot::initializeProbabilityDistribution() {
+    int width = map.getGrid()[0].size();
+    int height = map.getGrid().size();
+    double initialProbability = 1.0 / (width * height);
+    probabilityDistribution.resize(height, std::vector<double>(width, initialProbability));
+}
+
 
 void Robot::updatePosition(int newX, int newY){
     if (this->map.updateRobotPosition(this->x, this->y, newX, newY)){  
@@ -48,4 +57,14 @@ void Robot::displayPosition() const {
 
 std::vector<int> Robot::getSensorReading() const{
     return this->sensor.getReading(x, y, map);
+}
+
+void Robot::displayProbabilityDistribution() const {
+    std::cout << "Probability Distribution:" << std::endl;
+    for (const auto& row : probabilityDistribution) {
+        for (double prob : row) {
+            std::cout << prob << " ";
+        }
+        std::cout << std::endl;
+    }
 }

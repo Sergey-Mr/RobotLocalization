@@ -9,10 +9,12 @@ int main() {
     Robot robot(1, 1, map, 0.1); // Initialize robot with sensor noise level
     map.display();
     robot.displayPosition();
+    robot.displayProbabilityDistribution(); // Display the initial probability distribution
     robot.moveRight();
     robot.moveDown();
     robot.displayPosition();
     map.display(); // Display the map again to see the updated position
+    robot.displayProbabilityDistribution();
 
     // Get and display sensor readings
     std::vector<int> readings = robot.getSensorReading();
