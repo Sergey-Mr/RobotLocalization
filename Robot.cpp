@@ -1,7 +1,7 @@
 #include "Robot.h"
 #include <iostream>
 
-Robot::Robot(int x, int y, Map& map): x(x), y(y), map(map){
+Robot::Robot(int x, int y, Map& map, double sensorNoiseLevel): x(x), y(y), map(map), sensor(sensorNoiseLevel){
     map.addRobot(x, y);
 }
 
@@ -42,3 +42,10 @@ void Robot::moveRight(){
     }
 }
 
+void Robot::displayPosition() const {
+    std::cout << "Robot position: (" << this->x << ", " << this->y << ")" << std::endl;
+}
+
+std::vector<int> Robot::getSensorReading() const{
+    return this->sensor.getReading(x, y, map);
+}
