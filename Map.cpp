@@ -30,3 +30,21 @@ void Map::display() const {
         std::cout << std::endl;
     }
 }
+
+const std::vector<std::vector<int>>& Map::getGrid() const {
+    return this->grid;
+}
+
+bool Map::isValidMove(int newX, int newY) const{
+    return newX >= 0 && newX < this->width && newY >= 0 && this->height > newY && this->grid[newY][newX] == 0;
+}
+
+bool Map::updateRobotPosition(int oldX, int oldY, int newX, int newY){
+    if (this->isValidMove(newX, newY)){
+        this->grid[oldY][oldX] = 0;
+        this->grid[newY][newX] = 2;  
+        return true;
+    } else {
+        return false;
+    }
+}
