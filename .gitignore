@@ -1,0 +1,48 @@
+# C++ build artifacts
+*.o
+*.out
+robot_simulator
+program
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Build directories
+build/
+dist/
+bin/
+
+# Generated data
+probability_data.txt
+*.dat
+
+# IDE specific
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# System specific
+.DS_Store
+Thumbs.db
+
+# Dependencies
+/lib/
+/vendor/
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
