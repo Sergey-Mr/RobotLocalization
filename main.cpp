@@ -9,6 +9,7 @@
 #include <cstdlib>
 
 const int CELL_SIZE = 50;
+const double SENSOR_NOISE = 0.15;
 const int WINDOW_WIDTH = 1024;
 const int WINDOW_HEIGHT = 768;
 const char* FONT_PATH = "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf";
@@ -96,7 +97,7 @@ int main() {
     Map map(10, 10);
     map.addObject(2, 2, 2, 3);
     map.addObject(7, 6, 3, 2);
-    Robot robot(5, 5, map, 0.1);
+    Robot robot(5, 5, map, SENSOR_NOISE);
 
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Robot Localization");
     window.setFramerateLimit(60);
