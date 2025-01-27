@@ -1,11 +1,10 @@
 # Robot Localization
-
-A C++ implementation of robot localization using Bayesian updates with real-time 3D visualization.
+This project implements a robot localization algorithm that leverages Bayesian updates to estimate the robot's position in a 2D grid environment. It's designed for educational purposes and can be applied to robotic navigation in uncertain environments.
 
 ## How it Works
 - Robot Localization: Uses Bayesian updates to estimate the robot's position on a 2D grid.
-- Sensor Model: Simulates noisy sensor readings.
-- Motion Model: Updates the probability distribution based on robot movements.
+- Sensor Model: Simulates noisy sensor data to mimic real-world conditions and adjusts probabilities accordingly.
+- Motion Model: Predicts the robot's new state and updates the probability distribution when the robot moves.
 - Visualization: Real-time 3D plot of the probability distribution using matplotlib.
 
 ## Features
