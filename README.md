@@ -13,6 +13,9 @@ This project implements a robot localization algorithm that leverages Bayesian u
 - Real-time 3D visualization of probability distribution
 - SFML-based GUI
 
+## Demo 
+![Demo Image](imgs/demo.png)
+
 ## Prerequisites
 - C++
 - CMake 3.10+
