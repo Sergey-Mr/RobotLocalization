@@ -2,12 +2,14 @@
 #define SENSOR_H
 
 #include "Map.h"
+#include <vector>
 #include <random>
 
 class Sensor {
     public:
         Sensor(double noiseLevel);
         std::vector<int> getReading(int x, int y, const Map& map) const;
+        double getSingleReading(int x, int y, const Map& map) const; // Add this method
         double getNoise() const;
 
     private:

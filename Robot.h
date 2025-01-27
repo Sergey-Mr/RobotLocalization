@@ -3,6 +3,7 @@
 
 #include "Map.h"
 #include "Sensor.h"
+#include <vector>
 
 class Robot {
     public:
@@ -14,9 +15,9 @@ class Robot {
         void displayPosition() const;
         std::vector<int> getSensorReading() const;
         void displayProbabilityDistribution() const;
-        void updateProbabilityDistribution();
         int getX() const;
         int getY() const;
+        std::vector<std::vector<double>> getProbabilityDistribution() const;
 
     private:
         int x; 
@@ -26,8 +27,9 @@ class Robot {
         std::vector<std::vector<double>> probabilityDistribution;
         void updatePosition(int newX, int newY);
         void initializeProbabilityDistribution();
-        double sensorModel(int x, int y, const std::vector<int>& sensorReading) const;
-        void normalizeProbabilityDistribution();
+        void updateProbabilityDistributionAfterMove();
+        void updateProbabilityDistributionAfterSensorReading();
+        double calculateLikelihood(double sensorReading, int x, int y);
 };
 
 #endif

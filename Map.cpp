@@ -48,3 +48,7 @@ bool Map::updateRobotPosition(int oldX, int oldY, int newX, int newY){
         return false;
     }
 }
+
+double Map::getExpectedReading(int x, int y) const {
+    return static_cast<double>(grid[y][x]);
+}
