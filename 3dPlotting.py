@@ -1,12 +1,15 @@
 import matplotlib
-matplotlib.use("TkAgg") 
+matplotlib.use("TkAgg")
 
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
-file_name = "probability_distribution.txt"
-data = np.loadtxt(file_name)
+# Close any existing plots
+plt.close('all')
+
+# Read data, skipping the header line
+data = np.loadtxt("probability_data.txt", skiprows=1)
 
 data_normalized = data / np.max(data)  
 

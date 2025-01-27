@@ -4,11 +4,30 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
+#include <thread>
+#include <mutex>
+#include <cstdlib>
 
 const int CELL_SIZE = 50;
 const int WINDOW_WIDTH = 1024;
 const int WINDOW_HEIGHT = 768;
 const char* FONT_PATH = "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf";
+
+void saveProbabilityDistribution(const std::vector<std::vector<double>>& data, const std::string& filename) {
+    std::ofstream file(filename);
+    file << data.size() << " " << data[0].size() << "\n";
+    for (const auto& row : data) {
+        for (double value : row) {
+            file << value << " ";
+        }
+        file << "\n";
+    }
+}
+
+void launchPythonPlotter() {
+    system("pkill -f '3dPlotting.py' 2>/dev/null");
+    system("python3 3dPlotting.py &");
+}
 
 // Add hover effect for buttons
 sf::RectangleShape createButton(float x, float y, const sf::Vector2f& size, bool isHovered) {
@@ -73,21 +92,11 @@ void drawUI(sf::RenderWindow& window, const sf::Font& font, const std::vector<in
     window.draw(sensorText);
 }
 
-void exportProbabilityDistribution(const std::vector<std::vector<double>>& distribution, const std::string& filename) {
-    std::ofstream file(filename);
-    for (const auto& row : distribution) {
-        for (double value : row) {
-            file << value << " ";
-        }
-        file << "\n";
-    }
-}
-
 int main() {
     Map map(10, 10);
-    map.addObject(2, 3, 3, 2);
-    map.addObject(5, 5, 2, 3);
-    Robot robot(1, 1, map, 0.1);
+    map.addObject(2, 2, 2, 3);
+    map.addObject(7, 6, 3, 2);
+    Robot robot(5, 5, map, 0.1);
 
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Robot Localization");
     window.setFramerateLimit(60);
@@ -148,8 +157,18 @@ int main() {
                 } else if (isButtonClicked(buttons[4], mousePos)) {
                     currentSensorReadings = robot.getSensorReading();
                 }
+
                 robot.displayProbabilityDistribution();
-                exportProbabilityDistribution(robot.getProbabilityDistribution(), "probability_distribution.txt");
+                {
+                    auto distribution = robot.getProbabilityDistribution();
+                    saveProbabilityDistribution(distribution, "probability_data.txt");
+                    // Force flush the file
+                    std::ofstream("probability_data.txt", std::ios::app).flush();
+                }
+
+                // Small delay to ensure file is written
+                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+                launchPythonPlotter();
             }
         }
 
